@@ -34,7 +34,7 @@ export function BugList() {
   const hasInitialError = requestStatus === "error" && bugs.length === 0;
 
   const filteredBugs = useMemo(() => {
-    const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+    const normalizedSearchQuery = searchQuery.trim().toLocaleLowerCase("tr");
 
     return bugs.filter((bug) => {
       if (statusFilter !== "all" && bug.status !== statusFilter) {
@@ -71,7 +71,7 @@ export function BugList() {
         ...bug.stack,
       ]
         .join(" ")
-        .toLowerCase();
+        .toLocaleLowerCase("tr");
 
       return searchableText.includes(normalizedSearchQuery);
     });
@@ -94,11 +94,29 @@ export function BugList() {
       return sortDirection === "desc" ? result : -result;
     });
 
-    return {
-      today: sortedBugs.slice(0, 3),
-      thisWeek: sortedBugs.slice(3, 8),
-      older: sortedBugs.slice(8),
-    };
+    const now = new Date()
+    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    const startOfWeek = new Date(startOfToday)
+    startOfWeek.setDate(startOfWeek.getDate() - 6)
+
+    const today: BugNote[] = [];
+    const thisWeek: BugNote[] = [];
+    const older: BugNote[] = [];
+
+    for(const bug of sortedBugs){
+      const updatedAt = new Date(bug.updatedAt)
+
+      if(updatedAt >= startOfToday){
+        today.push(bug)
+      }
+      else if(updatedAt >= startOfWeek){
+        thisWeek.push(bug)
+      }
+      else{
+        older.push(bug)
+      }
+    }
+    return {today, thisWeek, older}
   }, [filteredBugs, sortDirection]);
 
   const listTitle = useMemo(() => {
