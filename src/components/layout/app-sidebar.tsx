@@ -876,6 +876,7 @@ function SettingsDialog({
                     value={emailPassword}
                     onChange={(event) => setEmailPassword(event.target.value)}
                     placeholder={copy.currentPassword}
+                    autoComplete="current-password"
                   />
                 </label>
               </div>
@@ -912,6 +913,7 @@ function SettingsDialog({
                       setCurrentPassword(event.target.value)
                     }
                     placeholder={copy.currentPassword}
+                    autoComplete="current-password"
                   />
                 </label>
 
@@ -924,6 +926,7 @@ function SettingsDialog({
                     value={newPassword}
                     onChange={(event) => setNewPassword(event.target.value)}
                     placeholder={copy.passwordPlaceholder}
+                    autoComplete="new-password"
                   />
                 </label>
               </div>
@@ -966,6 +969,7 @@ function SettingsDialog({
                   value={deletePassword}
                   onChange={(event) => setDeletePassword(event.target.value)}
                   placeholder={copy.deletePasswordPlaceholder}
+                  autoComplete="current-password"
                 />
               </label>
 

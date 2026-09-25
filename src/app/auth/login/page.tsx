@@ -84,6 +84,7 @@ export default function LoginPage() {
                 onChange={(event) => setPassword(event.target.value)}
                 placeholder="Your password"
                 type="password"
+                autoComplete="current-password"
               />
             </label>
 

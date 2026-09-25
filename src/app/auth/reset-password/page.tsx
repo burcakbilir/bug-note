@@ -70,6 +70,7 @@ function ResetPasswordForm() {  const searchParams = useSearchParams();
               onChange={(event) => setPassword(event.target.value)}
               placeholder={copy.passwordPlaceholder}
               type="password"
+              autoComplete="new-password"
             />
           </label>
 

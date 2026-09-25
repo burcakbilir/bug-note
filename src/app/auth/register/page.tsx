@@ -94,6 +94,7 @@ export default function RegisterPage() {
                 onChange={(event) => setPassword(event.target.value)}
                 placeholder="At least 8 characters"
                 type="password"
+                autoComplete="new-password"
               />
             </label>
 
