@@ -864,6 +864,7 @@ function SettingsDialog({
                     type="email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
+                    autoComplete="username"
                   />
                 </label>
 
@@ -892,6 +893,12 @@ function SettingsDialog({
               onSubmit={handlePasswordSubmit}
               className="rounded-md border border-slate-200 p-4"
             >
+              <input
+                type="hidden"
+                autoComplete="username"
+                value={user?.email ?? ""}
+                readOnly
+              />
               <div className="mb-4">
                 <p className="text-xs font-semibold uppercase text-slate-500">
                   {copy.password}
@@ -953,6 +960,12 @@ function SettingsDialog({
               onSubmit={handleDeleteAccountSubmit}
               className="rounded-md border border-red-200 bg-red-50 p-4"
             >
+              <input
+                type="hidden"
+                autoComplete="username"
+                value={user?.email ?? ""}
+                readOnly
+              />
               <p className="text-xs font-semibold uppercase text-red-700">
                 {copy.dangerZone}
               </p>
