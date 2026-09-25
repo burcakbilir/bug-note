@@ -82,6 +82,7 @@ export default function RegisterPage() {
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder="you@company.com"
                 type="email"
+                autoComplete="username"
               />
             </label>
 

@@ -59,6 +59,7 @@ export default function ForgotPasswordPage() {  const [email, setEmail] = useSta
               onChange={(event) => setEmail(event.target.value)}
               placeholder="you@company.com"
               type="email"
+              autoComplete="username"
             />
           </label>
 
