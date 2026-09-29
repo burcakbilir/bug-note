@@ -126,10 +126,17 @@ export default function RegisterPage() {
               Sign in
             </Link>
           </p>
+
+          <Link href="/auth/login?demo=1" className="block lg:hidden">
+            <Button type="button" variant="secondary" className="mt-4 w-full">
+              Sign in with the demo account
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </section>
 
-      <section className="border-t border-slate-200 bg-white px-5 py-10 lg:border-l lg:border-t-0 lg:p-10">
+      <section className="hidden border-l border-slate-200 bg-white p-10 lg:block">
         <div className="mx-auto flex h-full max-w-xl flex-col justify-center">
           <div className="rounded-2xl border border-[#f54a00]/20 bg-[#f54a00]/5 p-5">
             <p className="text-sm font-semibold text-[#f54a00]">
@@ -150,7 +157,7 @@ export default function RegisterPage() {
           <p className="mt-8 text-sm font-semibold text-[#f54a00]">
             Private by default
           </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-normal text-slate-950 lg:text-4xl">
+          <h2 className="mt-3 text-4xl font-semibold tracking-normal text-slate-950">
             Keep every hard bug searchable and tied to your own notes.
           </h2>
           <p className="mt-5 text-sm leading-6 text-slate-500">

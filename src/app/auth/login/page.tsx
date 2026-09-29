@@ -121,6 +121,18 @@ function LoginForm() {
               {isSubmitting ? "Signing in..." : "Sign in"}
               <ArrowRight className="h-4 w-4" />
             </Button>
+
+            <Button
+              type="button"
+              variant="secondary"
+              className="lg:hidden"
+              onClick={() => {
+                setEmail(demoAccount.email);
+                setPassword(demoAccount.password);
+              }}
+            >
+              Use demo credentials
+            </Button>
           </form>
 
           <p className="mt-5 text-sm text-slate-500">
@@ -145,17 +157,16 @@ function LoginForm() {
         </div>
       </section>
 
-      <section className="border-t border-slate-200 bg-white px-5 py-10 lg:border-l lg:border-t-0 lg:p-10">
+      <section className="hidden border-l border-slate-200 bg-white p-10 lg:block">
         <div className="mx-auto flex h-full max-w-xl flex-col justify-center">
           <p className="text-sm font-semibold text-[#f54a00]">Demo access</p>
 
-          <h2 className="mt-3 text-3xl font-semibold tracking-normal text-slate-950 lg:text-4xl">
+          <h2 className="mt-3 text-4xl font-semibold tracking-normal text-slate-950">
             Explore BugNote with one shared demo workspace.
           </h2>
 
           <p className="mt-4 text-sm leading-6 text-slate-500">
-            Use these credentials, or tap the button below to fill them in
-            automatically.
+            Use these credentials to sign in from the form on the left.
           </p>
 
           <div className="mt-8 rounded-2xl border border-[#f54a00]/20 bg-[#f54a00]/5 p-5">
