@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Logo } from "@/components/ui/logo";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useLogin } from "@/features/auth/hooks/use-login";
 import { loginSchema } from "@/features/auth/schemas/auth.schemas";
@@ -61,7 +62,18 @@ function LoginForm() {
 
   return (
     <main className="grid min-h-screen bg-slate-50 px-5 py-8 lg:grid-cols-[0.9fr_1.1fr] lg:p-0">
-      <section className="flex items-center justify-center">
+      <section className="flex flex-col items-center justify-center gap-6">
+        <Link
+          href="/"
+          aria-label="BugNote home"
+          className="flex items-center gap-2"
+        >
+          <Logo />
+          <span className="text-lg font-semibold text-slate-950">
+            BugNote
+          </span>
+        </Link>
+
         <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/70">
           <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#f54a00] text-white">
             <LockKeyhole className="h-5 w-5" />
@@ -133,16 +145,17 @@ function LoginForm() {
         </div>
       </section>
 
-      <section className="hidden border-l border-slate-200 bg-white p-10 lg:block">
+      <section className="border-t border-slate-200 bg-white px-5 py-10 lg:border-l lg:border-t-0 lg:p-10">
         <div className="mx-auto flex h-full max-w-xl flex-col justify-center">
           <p className="text-sm font-semibold text-[#f54a00]">Demo access</p>
 
-          <h2 className="mt-3 text-4xl font-semibold tracking-normal text-slate-950">
+          <h2 className="mt-3 text-3xl font-semibold tracking-normal text-slate-950 lg:text-4xl">
             Explore BugNote with one shared demo workspace.
           </h2>
 
           <p className="mt-4 text-sm leading-6 text-slate-500">
-            Use these credentials to sign in from the form on the left.
+            Use these credentials, or tap the button below to fill them in
+            automatically.
           </p>
 
           <div className="mt-8 rounded-2xl border border-[#f54a00]/20 bg-[#f54a00]/5 p-5">

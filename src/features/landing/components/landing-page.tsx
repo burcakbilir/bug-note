@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { Logo } from "@/components/ui/logo";
 import { copy } from "@/lib/copy";
 import { cn } from "@/lib/utils";
 
@@ -41,24 +42,13 @@ const memoryBlocks = [
   "Revisit note",
 ];
 
-function BugNoteLogo() {
-  return (
-    <div className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#f54a00] shadow-sm shadow-[#f54a00]/20">
-      <span className="absolute left-2.5 top-2.5 h-2 w-2 rounded-full bg-slate-950" />
-      <span className="absolute right-2.5 bottom-2.5 h-2 w-2 rounded-full bg-slate-950" />
-      <span className="h-[18px] w-1.5 -rotate-45 rounded-full bg-white" />
-      <span className="ml-0.5 h-[18px] w-1.5 -rotate-45 rounded-full bg-slate-950" />
-    </div>
-  );
-}
-
 export function LandingPage() {
   return (
     <main className="min-h-screen bg-white text-slate-950">
       <header className="border-b border-slate-200 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
           <div className="flex items-center gap-3">
-            <BugNoteLogo />
+            <Logo />
             <div>
               <p className="text-sm font-semibold">BugNote</p>
               <p className="text-xs text-slate-500">Personal debug memory</p>
