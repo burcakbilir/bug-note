@@ -27,6 +27,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ConfirmationDialog } from "@/components/ui/confirmation-dialog";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { copy } from "@/lib/copy";
 import {
   deleteCurrentUserRequest,
@@ -872,8 +873,7 @@ function SettingsDialog({
                   <span className="text-sm font-medium text-slate-700">
                     {copy.currentPassword}
                   </span>
-                  <Input
-                    type="password"
+                  <PasswordInput
                     value={emailPassword}
                     onChange={(event) => setEmailPassword(event.target.value)}
                     placeholder={copy.currentPassword}
@@ -913,8 +913,7 @@ function SettingsDialog({
                   <span className="text-sm font-medium text-slate-700">
                     {copy.currentPassword}
                   </span>
-                  <Input
-                    type="password"
+                  <PasswordInput
                     value={currentPassword}
                     onChange={(event) =>
                       setCurrentPassword(event.target.value)
@@ -928,8 +927,7 @@ function SettingsDialog({
                   <span className="text-sm font-medium text-slate-700">
                     {copy.newPassword}
                   </span>
-                  <Input
-                    type="password"
+                  <PasswordInput
                     value={newPassword}
                     onChange={(event) => setNewPassword(event.target.value)}
                     placeholder={copy.passwordPlaceholder}
@@ -977,8 +975,7 @@ function SettingsDialog({
                 <span className="text-sm font-medium text-red-700">
                   {copy.currentPassword}
                 </span>
-                <Input
-                  type="password"
+                <PasswordInput
                   value={deletePassword}
                   onChange={(event) => setDeletePassword(event.target.value)}
                   placeholder={copy.deletePasswordPlaceholder}

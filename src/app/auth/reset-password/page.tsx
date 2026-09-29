@@ -7,7 +7,7 @@ import { Suspense, useState } from "react";
 import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { copy } from "@/lib/copy";
 import { resetPasswordRequest } from "@/features/auth/api/auth-api";
 
@@ -65,11 +65,10 @@ function ResetPasswordForm() {  const searchParams = useSearchParams();
             <span className="text-sm font-medium text-slate-700">
               {copy.newPassword}
             </span>
-            <Input
+            <PasswordInput
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               placeholder={copy.passwordPlaceholder}
-              type="password"
               autoComplete="new-password"
             />
           </label>

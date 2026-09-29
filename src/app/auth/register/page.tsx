@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { useRegister } from "@/features/auth/hooks/use-register";
 import { registerSchema } from "@/features/auth/schemas/auth.schemas";
 
@@ -90,11 +91,10 @@ export default function RegisterPage() {
               <span className="text-sm font-medium text-slate-700">
                 Password
               </span>
-              <Input
+              <PasswordInput
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 placeholder="At least 8 characters"
-                type="password"
                 autoComplete="new-password"
               />
             </label>
@@ -119,7 +119,23 @@ export default function RegisterPage() {
 
       <section className="hidden border-l border-slate-200 bg-white p-10 lg:block">
         <div className="mx-auto flex h-full max-w-xl flex-col justify-center">
-          <p className="text-sm font-semibold text-[#f54a00]">
+          <div className="rounded-2xl border border-[#f54a00]/20 bg-[#f54a00]/5 p-5">
+            <p className="text-sm font-semibold text-[#f54a00]">
+              Just want to look around?
+            </p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              You can sign in with the shared demo account instead of
+              creating a new one.
+            </p>
+            <Link href="/auth/login?demo=1">
+              <Button type="button" className="mt-4 w-full">
+                Sign in with the demo account
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+
+          <p className="mt-8 text-sm font-semibold text-[#f54a00]">
             Private by default
           </p>
           <h2 className="mt-3 text-4xl font-semibold tracking-normal text-slate-950">

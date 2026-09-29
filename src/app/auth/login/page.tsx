@@ -2,25 +2,42 @@
 
 import { ArrowRight, LockKeyhole } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { useLogin } from "@/features/auth/hooks/use-login";
 import { loginSchema } from "@/features/auth/schemas/auth.schemas";
 
 const demoAccount = {
   email: "demo@bugnote.dev",
-  password: "demo123",
+  password: "demo1234",
 };
 
 export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
+  );
+}
+
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { login, isSubmitting } = useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (searchParams.get("demo") === "1") {
+      setEmail(demoAccount.email);
+      setPassword(demoAccount.password);
+    }
+  }, [searchParams]);
 
   const handleLogin = async () => {
     const result = loginSchema.safeParse({
@@ -80,11 +97,10 @@ export default function LoginPage() {
               <span className="text-sm font-medium text-slate-700">
                 Password
               </span>
-              <Input
+              <PasswordInput
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 placeholder="Your password"
-                type="password"
                 autoComplete="current-password"
               />
             </label>
