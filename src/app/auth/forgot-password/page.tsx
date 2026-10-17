@@ -10,18 +10,17 @@ import { Input } from "@/components/ui/input";
 import { copy } from "@/lib/copy";
 import { requestPasswordReset } from "@/features/auth/api/auth-api";
 
-export default function ForgotPasswordPage() {  const [email, setEmail] = useState("");
-  const [resetUrl, setResetUrl] = useState<string | null>(null);
+export default function ForgotPasswordPage() {
+  const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSent, setIsSent] = useState<boolean>(false);
 
   async function requestReset() {
     setIsSubmitting(true);
-    setResetUrl(null);
-
     try {
-      const data = await requestPasswordReset({ email });
+      await requestPasswordReset({ email });
       toast.success(copy.resetGenerated);
-      setResetUrl(data.resetUrl ?? null);
+      setIsSent(true);
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : copy.resetRequestFailed,
@@ -53,7 +52,9 @@ export default function ForgotPasswordPage() {  const [email, setEmail] = useSta
           }}
         >
           <label className="grid gap-1.5">
-            <span className="text-sm font-medium text-slate-700">{copy.email}</span>
+            <span className="text-sm font-medium text-slate-700">
+              {copy.email}
+            </span>
             <Input
               value={email}
               onChange={(event) => setEmail(event.target.value)}
@@ -63,14 +64,7 @@ export default function ForgotPasswordPage() {  const [email, setEmail] = useSta
             />
           </label>
 
-          {resetUrl ? (
-            <Link
-              href={resetUrl}
-              className="rounded-md border border-orange-200 bg-orange-50 px-3 py-2 text-sm font-semibold text-orange-700 hover:bg-orange-100"
-            >
-              {copy.openResetLink}
-            </Link>
-          ) : null}
+         {isSent && <p>If this email is registered, we have sent a reset link.</p>}
 
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? copy.generating : copy.generateResetLink}

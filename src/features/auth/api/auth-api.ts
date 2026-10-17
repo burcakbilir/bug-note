@@ -36,7 +36,7 @@ export function deleteCurrentUserRequest(input: { currentPassword: string }) {
 }
 
 export function requestPasswordReset(input: { email: string }) {
-  return apiPost<{ resetUrl: string | null }>("/auth/forgot-password", input);
+  return apiPost<{ ok: boolean }>("/auth/forgot-password", input);
 }
 
 export function resetPasswordRequest(input: {
