@@ -105,7 +105,7 @@ const initialState: BugsState = {
   errorMessage: null,
 };
 
-export const bugsSlice = createSlice({
+const bugsSlice = createSlice({
   name: "bugs",
   initialState,
   reducers: {
