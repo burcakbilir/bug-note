@@ -166,6 +166,7 @@ export function BugEditor() {
               control={
                 <Select
                   value={selectedBug.status}
+                  aria-label={copy.status}
                   onChange={(event) =>
                     dispatch(
                       updateBugRemote({
@@ -188,6 +189,7 @@ export function BugEditor() {
               control={
                 <Select
                   value={selectedBug.severity}
+                  aria-label={copy.priority}
                   onChange={(event) =>
                     dispatch(
                       updateBugRemote({
