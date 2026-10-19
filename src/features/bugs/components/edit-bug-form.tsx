@@ -2,7 +2,7 @@
 
 import { useAppDispatch } from "@/store/hooks";
 import { BugNote } from "../types/bug.types";
-import { FormEvent, useState } from "react";
+import { FormEvent, useId, useState } from "react";
 import { updateBugRemote } from "../slices/bug-slice";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
@@ -20,6 +20,7 @@ type EditBugFormProps = {
 export function EditBugForm({ bug, onClose }: EditBugFormProps) {
   const dispatch = useAppDispatch();
   const [titleError, setTitleError] = useState<string | null>(null);
+  const titleErrorId = useId();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [form, setForm] = useState({
@@ -134,11 +135,17 @@ export function EditBugForm({ bug, onClose }: EditBugFormProps) {
 
         <div className="min-h-0 flex-1 overflow-y-auto p-4 sm:p-5">
           <div className="grid gap-4 md:grid-cols-2">
-            <Field label={copy.title} required error={titleError}>
+            <Field
+              label={copy.title}
+              required
+              error={titleError}
+              errorId={titleErrorId}
+            >
               <Input
                 value={form.title}
                 onChange={(e) => updateField("title", e.target.value)}
                 aria-invalid={Boolean(titleError)}
+                aria-describedby={titleError ? titleErrorId : undefined}
               />
             </Field>
             <Field label={copy.summary}>
@@ -310,10 +317,17 @@ type FieldProps = {
   label: string;
   required?: boolean;
   error?: string | null;
+  errorId?: string;
   children: React.ReactNode;
 };
 
-function Field({ label, required = false, error, children }: FieldProps) {
+function Field({
+  label,
+  required = false,
+  error,
+  errorId,
+  children,
+}: FieldProps) {
   return (
     <label className="grid gap-1.5">
       <span className="text-sm font-medium text-slate-700">
@@ -321,7 +335,11 @@ function Field({ label, required = false, error, children }: FieldProps) {
         {required ? <span className="text-orange-600">*</span> : null}
       </span>
       {children}
-      {error ? <span className="text-sm font-medium text-red-600">{error}</span> : null}
+      {error ? (
+        <span id={errorId} className="text-sm font-medium text-red-600">
+          {error}
+        </span>
+      ) : null}
     </label>
   );
 }
