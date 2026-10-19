@@ -3,7 +3,7 @@
 import { ArrowRight, LockKeyhole } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
@@ -30,15 +30,12 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { login, isSubmitting } = useLogin();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  useEffect(() => {
-    if (searchParams.get("demo") === "1") {
-      setEmail(demoAccount.email);
-      setPassword(demoAccount.password);
-    }
-  }, [searchParams]);
+  const [email, setEmail] = useState(() =>
+    searchParams.get("demo") === "1" ? demoAccount.email : "",
+  );
+  const [password, setPassword] = useState(() =>
+    searchParams.get("demo") === "1" ? demoAccount.password : "",
+  );
 
   const handleLogin = async () => {
     const result = loginSchema.safeParse({
