@@ -54,6 +54,7 @@ export function TopBar() {
               value={searchValue}
               onChange={(event) => setSearchValue(event.target.value)}
               placeholder="Search bugs, responses, solutions..."
+              aria-label="Search bugs"
               className="pl-9"
             />
           </div>
