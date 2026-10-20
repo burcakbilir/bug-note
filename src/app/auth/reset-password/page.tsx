@@ -3,7 +3,7 @@
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { Button } from "@/components/ui/button";
@@ -19,8 +19,17 @@ export default function ResetPasswordPage() {
   );
 }
 
-function ResetPasswordForm() {  const searchParams = useSearchParams();
-  const token = searchParams.get("token") ?? "";
+function ResetPasswordForm() {
+  const searchParams = useSearchParams();
+  // Read the token once, then drop it from the URL so it doesn't linger in
+  // browser history or get copied along with the address bar.
+  const [token] = useState(() => searchParams.get("token") ?? "");
+
+  useEffect(() => {
+    if (window.location.search) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, []);
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
