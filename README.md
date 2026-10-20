@@ -32,11 +32,13 @@ Run the backend on `http://localhost:4000` before starting the frontend.
 
 ## Environment
 
-Create `.env.local`:
+Create `.env.local` (optional, this is the default):
 
 ```bash
-NEXT_PUBLIC_API_URL=http://localhost:4000
+API_PROXY_TARGET=http://localhost:4000
 ```
+
+The browser calls `/api/*` on the frontend's own origin, and Next.js rewrites those requests to `API_PROXY_TARGET`.
 
 ## Local Development
 

@@ -22,10 +22,11 @@ npm run build-storybook       # static storybook build
 
 There is no configured test runner (no `test` script, no vitest/jest config) — do not assume one exists.
 
-Required env (`.env.local`):
+Env (`.env.local`, optional — this is the default):
 ```bash
-NEXT_PUBLIC_API_URL=http://localhost:4000
+API_PROXY_TARGET=http://localhost:4000
 ```
+`src/lib/api.ts` calls the relative `/api/*` path; `next.config.ts` rewrites it to `API_PROXY_TARGET`, so the session cookie stays first-party. `next.config.ts` also sets the security response headers (CSP `frame-ancestors`, `X-Frame-Options`, etc.).
 
 To work on a full end-to-end flow, start the backend first (see `bug-note-be`'s own docs — it needs Docker Postgres via its `docker-compose.yml` and `npm run db:migrate`), then this frontend.
 
