@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { PasswordInput } from "@/components/ui/password-input";
 import { copy } from "@/lib/copy";
 import { resetPasswordRequest } from "@/features/auth/api/auth-api";
+import { resetPasswordSchema } from "@/features/auth/schemas/auth.schemas";
 
 export default function ResetPasswordPage() {
   return (
@@ -34,10 +35,17 @@ function ResetPasswordForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function reset() {
+    const result = resetPasswordSchema.safeParse({ password });
+
+    if (!result.success) {
+      toast.error(result.error.issues[0]?.message ?? copy.passwordResetFailed);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      await resetPasswordRequest({ token, password });
+      await resetPasswordRequest({ token, password: result.data.password });
       setPassword("");
       toast.success(copy.passwordUpdatedSignIn);
     } catch (error) {
